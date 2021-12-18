@@ -26,20 +26,30 @@ public class PrincesasModel extends RepresentationModel<PrincesasModel> {
 	private String nome;
 	private String reino;
 	private int idade;
-	public void setId(Long id2) {
-		// TODO Auto-generated method stub
-		
+	public Long getId() {
+		return id;
 	}
-	public void setNome(String nome2) {
-		// TODO Auto-generated method stub
-		
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public void setReino(String reino2) {
-		// TODO Auto-generated method stub
-		
+	public String getNome() {
+		return nome;
 	}
-	public void setIdade(int idade2) {
-		// TODO Auto-generated method stub
-		
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+	public String getReino() {
+		return reino;
+	}
+	public void setReino(String reino) {
+		this.reino = reino;
+	}
+	public int getIdade() {
+		return idade;
+	}
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+	
+	
 }

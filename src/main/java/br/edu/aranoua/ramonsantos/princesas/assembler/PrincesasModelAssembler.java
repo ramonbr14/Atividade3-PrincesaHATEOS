@@ -29,8 +29,7 @@ public class PrincesasModelAssembler extends RepresentationModelAssemblerSupport
 
 		princesaModel.add(linkTo(
 				methodOn(PrincesasController.class)
-				.getPrincesa(princesa.getId())
-				).withRel("principalmain"));
+				.getPrincesas()).withRel("principalmain"));
 		
 		princesaModel.setId(princesa.getId());
 		princesaModel.setNome(princesa.getNome());
@@ -47,7 +46,7 @@ public class PrincesasModelAssembler extends RepresentationModelAssemblerSupport
 		
 		princesaModels.add(linkTo(
 				methodOn(PrincesasController.class)
-				.getPrincesa())
+				.getPrincesas())
 				.withSelfRel());
 		
 		return princesaModels;

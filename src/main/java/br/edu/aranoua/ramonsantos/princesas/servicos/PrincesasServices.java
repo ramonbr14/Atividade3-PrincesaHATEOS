@@ -1,6 +1,5 @@
 package br.edu.aranoua.ramonsantos.princesas.servicos;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,7 @@ import br.edu.aranoua.ramonsantos.princesas.repository.PrincesasRepository;
 
 @Service
 public class PrincesasServices {
-	//List<Princesas> princesas = new ArrayList<Princesas>();
+	
 	
 	@Autowired
 	PrincesasRepository princesasRepository;
@@ -26,7 +25,7 @@ public class PrincesasServices {
 	}
 	
 	public List<Princesas> obterPrincesas(String reino){
-		return princesasRepository.findByContent(reino);
+		return princesasRepository.findByReino(reino);
 	}
 	
 	public Princesas criarPrincesas(Princesas princesa) {

@@ -35,7 +35,7 @@ public class PrincesasController {
 	PrincesasModelAssembler princesasModelAssembler; 
 	
 	@GetMapping
-	public ResponseEntity<CollectionModel<PrincesasModel>> getPrincesa() {
+	public ResponseEntity<CollectionModel<PrincesasModel>> getPrincesas() {
 		List<Princesas> princesas = princesaServices.obterPrincesas();
 		CollectionModel<PrincesasModel> princesasModel =
 				princesasModelAssembler.toCollectionModel(princesas);
@@ -49,7 +49,7 @@ public class PrincesasController {
 		return ResponseEntity.ok(princesasModel);
 	}
 	
-	@GetMapping("/id")
+	@GetMapping("/{id}")
 	public ResponseEntity<PrincesasModel> getPrincesa(@PathVariable("id") long id){
 		Optional<Princesas> optionalPrincesas = princesaServices.obterPrincesas(id);
 		if(optionalPrincesas.isPresent()) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,10 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.aranoua.ramonsantos.princesas.modelo.Princesas;
+import br.edu.aranoua.ramonsantos.princesas.assembler.PrincesasModelAssembler;
+import br.edu.aranoua.ramonsantos.princesas.entity.Princesas;
+import br.edu.aranoua.ramonsantos.princesas.modelo.PrincesasModel;
 import br.edu.aranoua.ramonsantos.princesas.servicos.PrincesasServices;
+
 
 
 @RestController
@@ -26,20 +31,32 @@ public class PrincesasController {
 	@Autowired
 	PrincesasServices princesaServices;
 	
+	@Autowired
+	PrincesasModelAssembler princesasModelAssembler; 
+	
 	@GetMapping
-	public ResponseEntity<List<Princesas>> getPrincesas(){
-		return ResponseEntity.ok(princesaServices.obterPrincesas());
+	public ResponseEntity<CollectionModel<PrincesasModel>> getPrincesa() {
+		List<Princesas> princesas = princesaServices.obterPrincesas();
+		CollectionModel<PrincesasModel> princesasModel =
+				princesasModelAssembler.toCollectionModel(princesas);
+		return ResponseEntity.ok(princesasModel);
 	}
 	@GetMapping("/procura")
-	public ResponseEntity<List<Princesas>>getPrincesasByReino(String reino){
-		return ResponseEntity.ok(princesaServices.obterPrincesas());
+	public ResponseEntity<CollectionModel<PrincesasModel>> getPrincesaByNome(@RequestParam String nome) {
+		List<Princesas> princesas = princesaServices.obterPrincesas(nome);
+		CollectionModel<PrincesasModel> princesasModel =
+				princesasModelAssembler.toCollectionModel(princesas);
+		return ResponseEntity.ok(princesasModel);
 	}
 	
 	@GetMapping("/id")
-	public ResponseEntity<Object> getPrincesas(@PathVariable("id") long id){
+	public ResponseEntity<PrincesasModel> getPrincesa(@PathVariable("id") long id){
 		Optional<Princesas> optionalPrincesas = princesaServices.obterPrincesas(id);
-		if(optionalPrincesas.isPresent())
-			return ResponseEntity.ok(princesaServices.get());
+		if(optionalPrincesas.isPresent()) {
+			Princesas princesas = optionalPrincesas.get();
+			PrincesasModel princesasModel = princesasModelAssembler.toModel(princesas);
+			return ResponseEntity.ok(princesasModel);
+		}
 		return ResponseEntity.notFound().build();
 	}
 	

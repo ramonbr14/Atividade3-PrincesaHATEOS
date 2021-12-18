@@ -7,12 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.aranoua.ramonsantos.princesas.modelo.Princesas;
+import br.edu.aranoua.ramonsantos.princesas.entity.Princesas;
 import br.edu.aranoua.ramonsantos.princesas.repository.PrincesasRepository;
 
 @Service
 public class PrincesasServices {
-	List<Princesas> princesas = new ArrayList<Princesas>();
+	//List<Princesas> princesas = new ArrayList<Princesas>();
 	
 	@Autowired
 	PrincesasRepository princesasRepository;

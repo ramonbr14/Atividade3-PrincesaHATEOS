@@ -1,4 +1,4 @@
-package br.edu.aranoua.ramonsantos.princesas.modelo;
+package br.edu.aranoua.ramonsantos.princesas.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ public class Princesas {
 	private int idade;
 	
 	public Princesas() {
-		super();
+		
 	}
 
 	public Princesas(Long id, String nome, String reino, int idade) {
